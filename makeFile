@@ -1,0 +1,10 @@
+main: main.c lab1.c
+	$(CC) -o $@ $^
+
+lab1: lab1.c
+	$(CC) -c lab1.c
+
+clean:
+	-rm -f *.o
+	@echo "All clean!"*/
+
