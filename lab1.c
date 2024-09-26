@@ -20,13 +20,19 @@ char* readString(char* fileName){
     memory = (char*)malloc(maxLen*sizeof(char)); //allocates 99 characters + NULL
 
     //opens up file and reads it
-    fptr = fopen(strcat(fileName, ".txt"),"r");
+    fptr = fopen(fileName, "r");
+
+    if (fptr == NULL)
+    {
+        perror("Cant open file");
+        return NULL;
+    }
 
     //copies file contents to memory
-    fread(memory, sizeof(char), maxLen, fptr);
+    //fread(memory, sizeof(char), maxLen, fptr);
     
     memory[maxLen] = '\0'; //last element will be NULL
-    fclose(fptr);
+    //fclose(fptr);
     return memory;
 
 }
@@ -53,8 +59,16 @@ char* mysteryExplode(const char* str){
     char* explodedText = (char*)malloc(maxLen*sizeof(char));
     //char* currentText = (char*)malloc(maxLen*sizeof(char));
     int count;
-    int currentSize = 2;
+    //int currentSize = 2;
 
+    for(int i = 0; i < strlen(str); i++)
+    {   
+        char* currentText = (char*)malloc(maxLen*sizeof(char));
+        strncpy(currentText, str, i);
+        strcat(explodedText, currentText);
+    }
+
+/*
     for(int i = 0; i < strlen(str); i++)
     {
         char* currentText = (char*)malloc(currentSize*sizeof(char));
@@ -71,7 +85,8 @@ char* mysteryExplode(const char* str){
         free(currentText);
         currentSize++;
     }
+    */
 
-    explodedText[maxLen] = '\0';
+    //explodedText[maxLen] = '\0';
     return explodedText;
 }
