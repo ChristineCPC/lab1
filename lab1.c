@@ -29,7 +29,7 @@ char* readString(char* fileName){
     }
 
     //copies file contents to memory
-    //fread(memory, sizeof(char), maxLen, fptr);
+    fread(memory, sizeof(char), maxLen, fptr);
     
     memory[maxLen] = '\0'; //last element will be NULL
     //fclose(fptr);
