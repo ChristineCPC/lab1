@@ -15,10 +15,8 @@ char* readString(char* fileName){
     FILE* fptr;
     int maxLen = 100;
     char* memory;
-    //char str[i];
-    //char* buffer[i]; //99 characters + NULL
     memory = (char*)malloc(maxLen*sizeof(char)); //allocates 99 characters + NULL
-
+    
     //opens up file and reads it
     fptr = fopen(fileName, "r");
 
@@ -29,9 +27,17 @@ char* readString(char* fileName){
     }
 
     //copies file contents to memory
-    fread(memory, sizeof(char), maxLen, fptr);
+    //fread(memory, sizeof(char), maxLen, fptr);
+    //int stop = 0;
+
+    fgets(memory, maxLen, fptr);
     
-    memory[maxLen] = '\0'; //last element will be NULL
+    char *ch = strchr(memory, '\n');
+
+    if(ch)
+    {
+        *ch ='\0'; //last element will be NULL
+    }
     //fclose(fptr);
     return memory;
 
@@ -58,35 +64,14 @@ char* mysteryExplode(const char* str){
     int maxLen = 100;
     char* explodedText = (char*)malloc(maxLen*sizeof(char));
     //char* currentText = (char*)malloc(maxLen*sizeof(char));
-    int count;
-    //int currentSize = 2;
 
-    for(int i = 0; i < strlen(str); i++)
+    for(int i = 0; i < strlen(str)+1; i++)
     {   
         char* currentText = (char*)malloc(maxLen*sizeof(char));
-        strncpy(currentText, str, i);
+        strncpy(currentText, str, i); //copies parts of str to currentText
         strcat(explodedText, currentText);
     }
 
-/*
-    for(int i = 0; i < strlen(str); i++)
-    {
-        char* currentText = (char*)malloc(currentSize*sizeof(char));
-        if(str[i] != (NULL || '\0'))
-        {
-            for(int j = 0; j <= i; j++)
-            {
-                //char currentChar = str[j];
-                strcat(currentText, str);
-            }
-        }
-
-        strcat(explodedText, currentText);
-        free(currentText);
-        currentSize++;
-    }
-    */
-
-    //explodedText[maxLen] = '\0';
+    explodedText[maxLen] = '\0';
     return explodedText;
 }
