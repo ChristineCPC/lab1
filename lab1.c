@@ -13,7 +13,7 @@
 char* readString(char* fileName){
     //TODO: Replace this line with your code
     FILE* fptr;
-    int maxLen = 100;
+    int maxLen = 99;
     char* memory;
     memory = (char*)malloc(maxLen*sizeof(char)); //allocates 99 characters + NULL
     
@@ -26,10 +26,6 @@ char* readString(char* fileName){
         return NULL;
     }
 
-    //copies file contents to memory
-    //fread(memory, sizeof(char), maxLen, fptr);
-    //int stop = 0;
-
     fgets(memory, maxLen, fptr);
     
     char *ch = strchr(memory, '\n');
@@ -38,7 +34,7 @@ char* readString(char* fileName){
     {
         *ch ='\0'; //last element will be NULL
     }
-    //fclose(fptr);
+
     return memory;
 
 }
@@ -61,9 +57,8 @@ char* mysteryExplode(const char* str){
     //TODO: Replace this line with your code
 
     
-    int maxLen = 100;
+    int maxLen = 99;
     char* explodedText = (char*)malloc(maxLen*sizeof(char));
-    //char* currentText = (char*)malloc(maxLen*sizeof(char));
 
     for(int i = 0; i < strlen(str)+1; i++)
     {   
@@ -72,6 +67,5 @@ char* mysteryExplode(const char* str){
         strcat(explodedText, currentText);
     }
 
-    explodedText[maxLen] = '\0';
     return explodedText;
 }
